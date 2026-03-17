@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONPS2431 – Molecular Biology &amp; Genetics | Mid-Semester Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS VARIABLES & RESET
+   ============================================================ */
+:root {
+  --header-bg: #20558a;
+  --header-bg-dark: #163d66;
+  --sidebar-bg: #f4f4f4;
+  --sidebar-hover: #e0e7ee;
+  --sidebar-active: #20558a;
+  --sidebar-active-text: #fff;
+  --sidebar-width: 320px;
+  --content-max: 860px;
+  --body-font: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  --heading-font: 'Merriweather', Georgia, serif;
+  --text-color: #333;
+  --text-light: #555;
+  --link-color: #20558a;
+  --link-hover: #0d3a6a;
+  --accent: #c4830a;
+  --accent-light: #fdf3e0;
+  --border-color: #ddd;
+  --success: #2e7d32;
+  --success-light: #e8f5e9;
+  --error: #c62828;
+  --error-light: #ffebee;
+  --info-bg: #e3f2fd;
+  --info-border: #1976d2;
+  --warn-bg: #fff8e1;
+  --warn-border: #f9a825;
+  --key-term-bg: #f3e5f5;
+  --key-term-border: #7b1fa2;
+  --diagram-bg: #f9fafb;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.12);
+  --radius: 4px;
+  --transition: 0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body-font);
+  color: var(--text-color);
+  line-height: 1.7;
+  font-size: 16px;
+  background: #fff;
+}
+a { color: var(--link-color); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+img { max-width: 100%; height: auto; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  background: var(--header-bg);
+  color: #fff;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-md);
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.header-brand .logo-text {
+  font-family: var(--heading-font);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.header-brand .logo-sub {
+  font-size: 0.82rem;
+  font-weight: 300;
+  opacity: 0.85;
+  display: block;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.header-nav a {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.header-nav a:hover { color: #fff; text-decoration: none; }
+
+/* Progress bar */
+.progress-bar-container {
+  background: var(--header-bg-dark);
+  padding: 0;
+  height: 4px;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #64b5f6, #e1f5fe);
+  width: 0%;
+  transition: width 0.4s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 80px);
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  font-size: 0.9rem;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+.sidebar-section { border-bottom: 1px solid var(--border-color); }
+.sidebar-section:last-child { border-bottom: none; }
+
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+  transition: background var(--transition);
+  user-select: none;
+}
+.sidebar-section-header:hover { background: var(--sidebar-hover); }
+.sidebar-section-header .week-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--header-bg);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.sidebar-section-header .arrow {
+  transition: transform 0.25s ease;
+  font-size: 0.7rem;
+  color: #999;
+}
+.sidebar-section.open .sidebar-section-header .arrow { transform: rotate(90deg); }
+.sidebar-section.active .sidebar-section-header {
+  background: var(--sidebar-hover);
+  border-left: 3px solid var(--sidebar-active);
+}
+
+.sidebar-links {
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.sidebar-section.open .sidebar-links { max-height: 800px; }
+.sidebar-links li a {
+  display: block;
+  padding: 8px 16px 8px 52px;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  transition: all var(--transition);
+  border-left: 3px solid transparent;
+}
+.sidebar-links li a:hover {
+  background: var(--sidebar-hover);
+  color: var(--text-color);
+  text-decoration: none;
+}
+.sidebar-links li a.active {
+  background: var(--sidebar-active);
+  color: var(--sidebar-active-text);
+  font-weight: 600;
+  border-left-color: var(--accent);
+}
+
+/* Completion indicators */
+.sidebar-links li a .check {
+  float: right;
+  color: var(--success);
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.sidebar-links li a.completed .check { opacity: 1; }
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+}
+.breadcrumbs {
+  padding: 12px 40px;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  background: #fafafa;
+  border-bottom: 1px solid var(--border-color);
+}
+.breadcrumbs a { color: var(--link-color); }
+.breadcrumbs span { margin: 0 6px; color: #bbb; }
+
+.content-wrapper {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 36px 40px 60px;
+}
+
+/* Page sections (each "page" is a section toggled by JS) */
+.page-section { display: none; }
+.page-section.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Typography */
+.content-wrapper h1 {
+  font-family: var(--heading-font);
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--header-bg);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.content-wrapper .subtitle {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+.content-wrapper h2 {
+  font-family: var(--heading-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--header-bg-dark);
+  margin: 36px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-color);
+}
+.content-wrapper h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 24px 0 10px;
+}
+.content-wrapper h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 18px 0 8px;
+}
+.content-wrapper p { margin-bottom: 14px; }
+.content-wrapper ul, .content-wrapper ol {
+  margin: 10px 0 18px 24px;
+}
+.content-wrapper li { margin-bottom: 6px; }
+.content-wrapper hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 32px 0;
+}
+
+/* ============================================================
+   REUSABLE CONTENT COMPONENTS
+   ============================================================ */
+
+/* Info/Callout boxes */
+.callout {
+  padding: 16px 20px;
+  border-left: 4px solid;
+  border-radius: var(--radius);
+  margin: 20px 0;
+  font-size: 0.92rem;
+}
+.callout-info { background: var(--info-bg); border-color: var(--info-border); }
+.callout-warn { background: var(--warn-bg); border-color: var(--warn-border); }
+.callout-key { background: var(--key-term-bg); border-color: var(--key-term-border); }
+.callout-success { background: var(--success-light); border-color: var(--success); }
+.callout-error { background: var(--error-light); border-color: var(--error); }
+.callout-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+/* Tables */
+.data-table-wrapper { overflow-x: auto; margin: 20px 0; }
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.data-table th {
+  background: var(--header-bg);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+.data-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+}
+.data-table tr:nth-child(even) { background: #f9f9f9; }
+.data-table tr:hover { background: #f0f4f8; }
+
+/* Diagram containers */
+.diagram-container {
+  background: var(--diagram-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+  text-align: center;
+}
+.diagram-container .diagram-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  color: var(--header-bg-dark);
+}
+.diagram-container svg { max-width: 100%; height: auto; }
+
+/* Interactive components placeholder */
+.interactive-container {
+  background: #f0f7ff;
+  border: 2px dashed var(--info-border);
+  border-radius: 8px;
+  padding: 30px;
+  margin: 24px 0;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.interactive-container .ic-icon { font-size: 2rem; margin-bottom: 10px; }
+.interactive-container .ic-label { font-weight: 600; color: var(--info-border); }
+.interactive-container .ic-desc { font-size: 0.85rem; color: var(--text-light); margin-top: 6px; }
+
+/* Quiz components */
+.quiz-container {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: var(--shadow-sm);
+}
+.quiz-container .quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.quiz-container .quiz-header .quiz-icon { font-size: 1.4rem; }
+.quiz-container .quiz-header h3 { margin: 0; font-size: 1.05rem; }
+.quiz-question {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: var(--radius);
+}
+.quiz-question p.q-text { font-weight: 600; margin-bottom: 12px; }
+.quiz-option {
+  display: block;
+  padding: 10px 14px;
+  margin: 6px 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.9rem;
+}
+.quiz-option:hover { background: var(--sidebar-hover); border-color: var(--link-color); }
+.quiz-option.selected { border-color: var(--link-color); background: #e3f2fd; }
+.quiz-option.correct { border-color: var(--success); background: var(--success-light); }
+.quiz-option.incorrect { border-color: var(--error); background: var(--error-light); }
+.quiz-feedback {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  margin-top: 10px;
+  font-size: 0.88rem;
+  display: none;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: var(--success-light); color: var(--success); }
+.quiz-feedback.incorrect { background: var(--error-light); color: var(--error); }
+
+/* Key term highlighting */
+.key-term {
+  background: var(--key-term-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  color: #6a1b9a;
+}
+
+/* Step/Process lists */
+.process-steps {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  counter-reset: step;
+}
+.process-steps li {
+  counter-increment: step;
+  padding: 14px 14px 14px 56px;
+  position: relative;
+  margin-bottom: 4px;
+  background: #fafafa;
+  border-radius: var(--radius);
+  border-left: 3px solid var(--header-bg);
+}
+.process-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  width: 28px;
+  height: 28px;
+  background: var(--header-bg);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Comparison / Side-by-side boxes */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.compare-box {
+  padding: 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+.compare-box h4 {
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid;
+}
+.compare-box.box-a { border-color: #1976d2; }
+.compare-box.box-a h4 { border-color: #1976d2; color: #1976d2; }
+.compare-box.box-b { border-color: #e65100; }
+.compare-box.box-b h4 { border-color: #e65100; color: #e65100; }
+
+/* Analogy boxes */
+.analogy-box {
+  background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 20px 0;
+}
+.analogy-box .analogy-icon { font-size: 1.3rem; margin-right: 8px; }
+.analogy-box .analogy-title { font-weight: 700; color: var(--accent); }
+
+/* Prev / Next navigation */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+.page-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition);
+}
+.page-nav a:hover {
+  background: var(--sidebar-hover);
+  border-color: var(--link-color);
+  text-decoration: none;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--header-bg-dark);
+  color: rgba(255,255,255,0.8);
+  padding: 24px 40px;
+  font-size: 0.82rem;
+  text-align: center;
+}
+.site-footer a { color: rgba(255,255,255,0.9); }
+
+/* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+@media (max-width: 900px) {
+  .mobile-menu-toggle { display: block; }
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 64px;
+    width: 85%;
+    max-width: 340px;
+    z-index: 999;
+    transition: left 0.3s ease;
+    box-shadow: var(--shadow-md);
+  }
+  .sidebar.mobile-open { left: 0; }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: 64px;
+    background: rgba(0,0,0,0.4);
+    z-index: 998;
+  }
+  .sidebar-overlay.show { display: block; }
+  .content-wrapper { padding: 24px 20px 48px; }
+  .breadcrumbs { padding: 10px 20px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .header-nav { display: none; }
+  :root { --sidebar-width: 100%; }
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  .site-header, .sidebar, .page-nav, .site-footer { display: none; }
+  .main-content { width: 100%; }
+  .content-wrapper { max-width: 100%; padding: 0; }
+  .page-section { display: block !important; page-break-before: always; }
+  .page-section:first-child { page-break-before: avoid; }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.text-center { text-align: center; }
+.text-small { font-size: 0.85rem; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.fw-bold { font-weight: 700; }
+.hidden { display: none; }
+
+/* Exam-weight badge */
+.exam-weight {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* Learning objectives box */
+.learning-objectives {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 20px 0;
+}
+.learning-objectives h4 {
+  color: var(--success);
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+}
+.learning-objectives ul { margin: 0 0 0 20px; }
+.learning-objectives li { color: var(--text-color); font-size: 0.9rem; margin-bottom: 4px; }
+
+/* Tab system for content views */
+.tab-group { margin: 24px 0; }
+.tab-buttons {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  gap: 0;
+}
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all var(--transition);
+}
+.tab-btn:hover { color: var(--text-color); }
+.tab-btn.active {
+  color: var(--link-color);
+  border-bottom-color: var(--link-color);
+}
+.tab-panel { display: none; padding: 20px 0; }
+.tab-panel.active { display: block; }
+
+/* Flashcard style */
+.flashcard {
+  perspective: 600px;
+  margin: 16px 0;
+  height: 180px;
+  cursor: pointer;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+.flashcard-front {
+  background: var(--header-bg);
+  color: #fff;
+  font-weight: 600;
+}
+.flashcard-back {
+  background: #e8f5e9;
+  color: var(--text-color);
+  transform: rotateY(180deg);
+  border: 1px solid #a5d6a7;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="header-brand">
+      <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Open navigation">&#9776;</button>
+      <div>
+        <span class="logo-text">ONPS2431 — Molecular Biology &amp; Genetics</span>
+        <span class="logo-sub">RMIT University &middot; Mid-Semester Study Guide &middot; Weeks 1–7</span>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#" onclick="navigateTo('home'); return false;">Course Home</a>
+      <a href="#" onclick="navigateTo('glossary'); return false;">Glossary</a>
+      <a href="#" onclick="navigateTo('exam-prep'); return false;">Exam Prep</a>
+    </nav>
+  </div>
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ============================================================
+     LAYOUT
+     ============================================================ -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+
+    <!-- HOME -->
+    <div class="sidebar-section" data-section="home">
+      <button class="sidebar-section-header" onclick="navigateTo('home')">
+        <span>🏠 Course Home</span>
+      </button>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div class="sidebar-section" data-section="w1">
+      <button class="sidebar-section-header" onclick="toggleSection('w1')">
+        <span><span class="week-badge">1</span> DNA &amp; Central Dogma</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="w1-overview">Overview<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w1-dna-structure">DNA Structure<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w1-replication">DNA Replication<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w1-transcription">Transcription<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w1-translation">Translation<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w1-central-dogma">Central Dogma Summary<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w1-quiz">Knowledge Check<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="sidebar-section" data-section="w2">
+      <button class="sidebar-section-header" onclick="toggleSection('w2')">
+        <span><span class="week-badge">2</span> Molecular Techniques</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="w2-overview">Overview<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w2-gel-electrophoresis">Gel Electrophoresis<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w2-restriction-enzymes">Restriction Enzymes<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w2-vectors">Vectors &amp; Plasmids<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w2-pcr">PCR Fundamentals<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w2-blotting">Blotting Techniques<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w2-miniprep">Miniprep / Plasmid Isolation<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w2-quiz">Knowledge Check<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="sidebar-section" data-section="w3">
+      <button class="sidebar-section-header" onclick="toggleSection('w3')">
+        <span><span class="week-badge">3</span> Molecular Cloning</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="w3-overview">Overview<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w3-cloning-workflow">Cloning Workflow<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w3-selection-screening">Selection &amp; Screening<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w3-blue-white">Blue-White Screening<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w3-quiz">Knowledge Check<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="sidebar-section" data-section="w4">
+      <button class="sidebar-section-header" onclick="toggleSection('w4')">
+        <span><span class="week-badge">4</span> Bacterial Gene Transfer</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="w4-overview">Overview<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w4-transformation">Transformation<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w4-conjugation">Conjugation<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w4-transduction">Transduction<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w4-lytic-lysogenic">Lytic vs Lysogenic Cycle<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w4-comparison">Comparison Table<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w4-quiz">Knowledge Check<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+    <!-- WEEK 5 -->
+    <div class="sidebar-section" data-section="w5">
+      <button class="sidebar-section-header" onclick="toggleSection('w5')">
+        <span><span class="week-badge">5</span> Transgenic &amp; GMOs</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="w5-overview">Overview<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w5-transgenic">Transgenic Organisms<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w5-gmo">GMO Principles<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w5-bt-crops">Bt Crops &amp; Insect Resistance<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w5-recombinant-proteins">Recombinant Proteins<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w5-quiz">Knowledge Check<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+    <!-- WEEK 6 -->
+    <div class="sidebar-section" data-section="w6">
+      <button class="sidebar-section-header" onclick="toggleSection('w6')">
+        <span><span class="week-badge">6</span> Gene Therapy</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="w6-overview">Overview<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w6-somatic-germline">Somatic vs Germline<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w6-delivery">Viral &amp; Non-Viral Delivery<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w6-ex-vivo-in-vivo">Ex Vivo vs In Vivo<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w6-scid">SCID Case Study<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w6-quiz">Knowledge Check<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+    <!-- WEEK 7 -->
+    <div class="sidebar-section" data-section="w7">
+      <button class="sidebar-section-header" onclick="toggleSection('w7')">
+        <span><span class="week-badge">7</span> PCR Applications &amp; qPCR</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="w7-overview">Overview<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w7-pcr-applications">PCR Applications<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w7-qpcr">Real-Time PCR (qPCR)<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w7-sybr-taqman">SYBR Green vs TaqMan<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w7-ct-values">Ct Values &amp; Quantification<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w7-rt-pcr">RT-PCR<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="w7-quiz">Knowledge Check<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+    <!-- EXTRAS -->
+    <div class="sidebar-section" data-section="extras">
+      <button class="sidebar-section-header" onclick="toggleSection('extras')">
+        <span>📚 Resources &amp; Exam Prep</span>
+        <span class="arrow">▶</span>
+      </button>
+      <ul class="sidebar-links">
+        <li><a href="#" data-page="glossary">Full Glossary<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="exam-prep">Exam Preparation<span class="check">✓</span></a></li>
+        <li><a href="#" data-page="cheat-sheet">Quick Reference Sheet<span class="check">✓</span></a></li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+      <a href="#" onclick="navigateTo('home'); return false;">Course Home</a>
+    </div>
+
+    <div class="content-wrapper">
+
+      <!-- ==================== HOME PAGE ==================== -->
+      <section class="page-section active" id="page-home">
+        <h1>Molecular Biology &amp; Genetics</h1>
+        <p class="subtitle">ONPS2431 — Mid-Semester Study Guide &middot; Weeks 1–7</p>
+
+        <div class="callout callout-info">
+          <div class="callout-title">📖 About This Guide</div>
+          <p>This is your comprehensive, interactive study resource for the ONPS2431 mid-semester examination. It covers all content from Weeks 1–7 using multiple learning techniques: detailed explanations, diagrams, comparison tables, interactive quizzes, flashcards, step-by-step processes, and analogy-based learning. Work through each week systematically or jump to any topic using the sidebar.</p>
+        </div>
+
+        <h2>Course Map</h2>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Week</th>
+                <th>Topic</th>
+                <th>Key Concepts</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="week-badge">1</span></td>
+                <td><a href="#" onclick="navigateTo('w1-overview'); return false;">DNA &amp; Central Dogma</a></td>
+                <td>DNA structure, replication, transcription, translation</td>
+                <td><span id="status-w1">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="week-badge">2</span></td>
+                <td><a href="#" onclick="navigateTo('w2-overview'); return false;">Molecular Techniques</a></td>
+                <td>Gel electrophoresis, restriction enzymes, vectors, PCR, blotting, miniprep</td>
+                <td><span id="status-w2">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="week-badge">3</span></td>
+                <td><a href="#" onclick="navigateTo('w3-overview'); return false;">Molecular Cloning</a></td>
+                <td>Cloning workflow, selection &amp; screening, blue-white screening</td>
+                <td><span id="status-w3">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="week-badge">4</span></td>
+                <td><a href="#" onclick="navigateTo('w4-overview'); return false;">Bacterial Gene Transfer</a></td>
+                <td>Transformation, conjugation, transduction, lytic vs lysogenic</td>
+                <td><span id="status-w4">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="week-badge">5</span></td>
+                <td><a href="#" onclick="navigateTo('w5-overview'); return false;">Transgenic &amp; GMOs</a></td>
+                <td>Transgenic organisms, Bt crops, recombinant proteins</td>
+                <td><span id="status-w5">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="week-badge">6</span></td>
+                <td><a href="#" onclick="navigateTo('w6-overview'); return false;">Gene Therapy</a></td>
+                <td>Somatic vs germline, viral/non-viral delivery, SCID case</td>
+                <td><span id="status-w6">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="week-badge">7</span></td>
+                <td><a href="#" onclick="navigateTo('w7-overview'); return false;">PCR Applications &amp; qPCR</a></td>
+                <td>qPCR, SYBR Green vs TaqMan, Ct values, RT-PCR</td>
+                <td><span id="status-w7">—</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>How to Use This Guide</h2>
+        <ol class="process-steps">
+          <li><strong>Read each topic page</strong> — core content is presented with text, diagrams, and tables. Key terms are <span class="key-term">highlighted in purple</span>.</li>
+          <li><strong>Study the diagrams</strong> — interactive and static diagrams help you visualize processes like replication, transcription, and cloning.</li>
+          <li><strong>Test yourself</strong> — every week ends with a Knowledge Check quiz. Aim for 100% before moving on.</li>
+          <li><strong>Use active recall</strong> — try to explain each concept from memory before re-reading. Use the flashcards to test yourself.</li>
+          <li><strong>Review the Glossary &amp; Cheat Sheet</strong> — consolidate all key terms and processes before the exam.</li>
+        </ol>
+
+        <div class="callout callout-warn">
+          <div class="callout-title">⚠️ Study Tip</div>
+          <p>Don't just read passively. After each subtopic, close the page and write out what you remember on paper or a blank doc. Come back and fill gaps in a <strong>different colour</strong>. This is the single most effective study technique for exam performance.</p>
+        </div>
+
+        <div class="page-nav">
+          <span></span>
+          <a href="#" onclick="navigateTo('w1-overview'); return false;">Begin Week 1 →</a>
+        </div>
+      </section>
+
+      <!-- ==================== WEEK 1 OVERVIEW (SAMPLE) ==================== -->
+      <section class="page-section" id="page-w1-overview">
+        <h1>Week 1: DNA &amp; the Central Dogma</h1>
+        <p class="subtitle">DNA structure, replication, transcription, and translation</p>
+
+        <div class="learning-objectives">
+          <h4>🎯 Learning Objectives</h4>
+          <ul>
+            <li>Describe the structure of DNA including nucleotide components, base pairing, and the double helix</li>
+            <li>Explain the process of semi-conservative DNA replication and the roles of key enzymes</li>
+            <li>Outline the steps of transcription from initiation to termination</li>
+            <li>Describe translation including the roles of mRNA, tRNA, and ribosomes</li>
+            <li>Summarise the Central Dogma of molecular biology and its significance</li>
+          </ul>
+        </div>
+
+        <p>This week forms the <strong>foundation</strong> of everything else in this course. Every technique in Weeks 2–7 manipulates, copies, or analyses DNA. If you nail this week, the rest clicks into place.</p>
+
+        <h2>Topics in This Week</h2>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr><th>Subtopic</th><th>What You'll Learn</th><th>Teaching Methods</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="#" onclick="navigateTo('w1-dna-structure'); return false;">DNA Structure</a></td>
+                <td>Nucleotides, base pairing (A-T, G-C), antiparallel strands, major/minor grooves</td>
+                <td>Diagrams, analogy, table</td>
+              </tr>
+              <tr>
+                <td><a href="#" onclick="navigateTo('w1-replication'); return false;">DNA Replication</a></td>
+                <td>Semi-conservative model, origin of replication, leading/lagging strand, Okazaki fragments</td>
+                <td>Step-by-step process, enzyme table, interactive diagram</td>
+              </tr>
+              <tr>
+                <td><a href="#" onclick="navigateTo('w1-transcription'); return false;">Transcription</a></td>
+                <td>RNA polymerase, promoter, template vs coding strand, mRNA processing</td>
+                <td>Comparison table, process diagram</td>
+              </tr>
+              <tr>
+                <td><a href="#" onclick="navigateTo('w1-translation'); return false;">Translation</a></td>
+                <td>Ribosomes, codons, tRNA, initiation/elongation/termination</td>
+                <td>Interactive codon table, step process, analogy</td>
+              </tr>
+              <tr>
+                <td><a href="#" onclick="navigateTo('w1-central-dogma'); return false;">Central Dogma Summary</a></td>
+                <td>DNA → RNA → Protein, exceptions (reverse transcriptase)</td>
+                <td>Flow diagram, summary table</td>
+              </tr>
+              <tr>
+                <td><a href="#" onclick="navigateTo('w1-quiz'); return false;">Knowledge Check</a></td>
+                <td>Test your understanding of Week 1</td>
+                <td>Multiple-choice quiz with feedback</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('home'); return false;">← Course Home</a>
+          <a href="#" onclick="navigateTo('w1-dna-structure'); return false;">DNA Structure →</a>
+        </div>
+      </section>
+
+      <!-- ==================== PLACEHOLDER PAGES (All weeks) ==================== -->
+      <!-- These are skeleton pages that will be filled with content -->
+
+      <section class="page-section" id="page-w1-dna-structure">
+        <h1>DNA Structure</h1>
+        <p class="subtitle">Week 1 &middot; The molecular architecture of the genetic blueprint</p>
+        <div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Detailed content for this page — including nucleotide diagrams, base-pairing rules, double helix illustrations, and comparison tables — will be built in the next phase.</p></div>
+        <div class="diagram-container"><div class="diagram-title">DNA Double Helix Structure</div><p class="text-small" style="color:#999;">[Interactive SVG diagram will be rendered here]</p></div>
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('w1-overview'); return false;">← Week 1 Overview</a>
+          <a href="#" onclick="navigateTo('w1-replication'); return false;">DNA Replication →</a>
+        </div>
+      </section>
+
+      <section class="page-section" id="page-w1-replication">
+        <h1>DNA Replication</h1>
+        <p class="subtitle">Week 1 &middot; How cells copy their entire genome with remarkable accuracy</p>
+        <div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Enzyme table, replication fork diagram, step-by-step process, leading vs lagging strand comparison, Okazaki fragments — coming in next phase.</p></div>
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('w1-dna-structure'); return false;">← DNA Structure</a>
+          <a href="#" onclick="navigateTo('w1-transcription'); return false;">Transcription →</a>
+        </div>
+      </section>
+
+      <section class="page-section" id="page-w1-transcription">
+        <h1>Transcription</h1>
+        <p class="subtitle">Week 1 &middot; Converting the DNA code into messenger RNA</p>
+        <div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Promoter recognition, initiation, elongation, termination, mRNA processing (5' cap, poly-A tail, splicing) — coming in next phase.</p></div>
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('w1-replication'); return false;">← DNA Replication</a>
+          <a href="#" onclick="navigateTo('w1-translation'); return false;">Translation →</a>
+        </div>
+      </section>
+
+      <section class="page-section" id="page-w1-translation">
+        <h1>Translation</h1>
+        <p class="subtitle">Week 1 &middot; Building proteins from the mRNA blueprint</p>
+        <div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Ribosome structure, codon table, tRNA anticodons, initiation/elongation/termination steps, wobble hypothesis — coming in next phase.</p></div>
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('w1-transcription'); return false;">← Transcription</a>
+          <a href="#" onclick="navigateTo('w1-central-dogma'); return false;">Central Dogma →</a>
+        </div>
+      </section>
+
+      <section class="page-section" id="page-w1-central-dogma">
+        <h1>Central Dogma Summary</h1>
+        <p class="subtitle">Week 1 &middot; The fundamental flow of genetic information</p>
+        <div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>DNA → RNA → Protein flow diagram, exceptions (retroviruses, prions), summary comparison table — coming in next phase.</p></div>
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('w1-translation'); return false;">← Translation</a>
+          <a href="#" onclick="navigateTo('w1-quiz'); return false;">Knowledge Check →</a>
+        </div>
+      </section>
+
+      <section class="page-section" id="page-w1-quiz">
+        <h1>Week 1: Knowledge Check</h1>
+        <p class="subtitle">Test your understanding of DNA structure, replication, transcription &amp; translation</p>
+        <div class="quiz-container">
+          <div class="quiz-header"><span class="quiz-icon">🧪</span><h3>Quiz — 10 questions covering all Week 1 topics</h3></div>
+          <div class="callout callout-info"><p>Interactive quiz with immediate feedback will be built in the content phase.</p></div>
+        </div>
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('w1-central-dogma'); return false;">← Central Dogma</a>
+          <a href="#" onclick="navigateTo('w2-overview'); return false;">Begin Week 2 →</a>
+        </div>
+      </section>
+
+      <!-- WEEK 2 PAGES -->
+      <section class="page-section" id="page-w2-overview">
+        <h1>Week 2: Molecular Techniques</h1>
+        <p class="subtitle">The essential laboratory toolkit of molecular biology</p>
+        <div class="learning-objectives">
+          <h4>🎯 Learning Objectives</h4>
+          <ul>
+            <li>Explain the principle and procedure of agarose gel electrophoresis</li>
+            <li>Describe how restriction enzymes cut DNA and the difference between sticky and blunt ends</li>
+            <li>Compare types of vectors (plasmids, phages, BACs, YACs) and their key features</li>
+            <li>Outline the three steps of PCR and explain the role of each component</li>
+            <li>Distinguish between Southern, Northern, and Western blotting</li>
+            <li>Describe the miniprep procedure for plasmid isolation</li>
+          </ul>
+        </div>
+        <div class="page-nav">
+          <a href="#" onclick="navigateTo('w1-quiz'); return false;">← Week 1 Quiz</a>
+          <a href="#" onclick="navigateTo('w2-gel-electrophoresis'); return false;">Gel Electrophoresis →</a>
+        </div>
+      </section>
+
+      <section class="page-section" id="page-w2-gel-electrophoresis"><h1>Gel Electrophoresis</h1><p class="subtitle">Week 2 &middot; Separating DNA fragments by size</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Agarose gel setup, how DNA migrates, staining with ethidium bromide, reading a gel image, molecular weight markers — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-overview'); return false;">← Overview</a><a href="#" onclick="navigateTo('w2-restriction-enzymes'); return false;">Restriction Enzymes →</a></div></section>
+
+      <section class="page-section" id="page-w2-restriction-enzymes"><h1>Restriction Enzymes</h1><p class="subtitle">Week 2 &middot; Molecular scissors for precise DNA cutting</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Type II restriction enzymes, palindromic sequences, sticky vs blunt ends, naming conventions, isoschizomers — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-gel-electrophoresis'); return false;">← Gel Electrophoresis</a><a href="#" onclick="navigateTo('w2-vectors'); return false;">Vectors →</a></div></section>
+
+      <section class="page-section" id="page-w2-vectors"><h1>Vectors &amp; Plasmids</h1><p class="subtitle">Week 2 &middot; Vehicles for carrying DNA into host cells</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Plasmid features (ori, MCS, selectable marker), expression vectors, phage vectors, BACs, YACs, comparison table — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-restriction-enzymes'); return false;">← Restriction Enzymes</a><a href="#" onclick="navigateTo('w2-pcr'); return false;">PCR →</a></div></section>
+
+      <section class="page-section" id="page-w2-pcr"><h1>PCR Fundamentals</h1><p class="subtitle">Week 2 &middot; Amplifying DNA — the photocopier of molecular biology</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Three steps (denature, anneal, extend), Taq polymerase, primer design, exponential amplification, thermal cycler — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-vectors'); return false;">← Vectors</a><a href="#" onclick="navigateTo('w2-blotting'); return false;">Blotting →</a></div></section>
+
+      <section class="page-section" id="page-w2-blotting"><h1>Blotting Techniques</h1><p class="subtitle">Week 2 &middot; Detecting specific DNA, RNA, or protein sequences</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Southern (DNA), Northern (RNA), Western (protein) blotting — procedure steps, probe hybridisation, comparison table — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-pcr'); return false;">← PCR</a><a href="#" onclick="navigateTo('w2-miniprep'); return false;">Miniprep →</a></div></section>
+
+      <section class="page-section" id="page-w2-miniprep"><h1>Miniprep / Plasmid Isolation</h1><p class="subtitle">Week 2 &middot; Extracting plasmid DNA from bacterial cells</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Alkaline lysis method, resuspension/lysis/neutralisation steps, column purification, quality check — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-blotting'); return false;">← Blotting</a><a href="#" onclick="navigateTo('w2-quiz'); return false;">Knowledge Check →</a></div></section>
+
+      <section class="page-section" id="page-w2-quiz"><h1>Week 2: Knowledge Check</h1><p class="subtitle">Test your understanding of molecular techniques</p><div class="quiz-container"><div class="quiz-header"><span class="quiz-icon">🧪</span><h3>Quiz — covering all Week 2 topics</h3></div><div class="callout callout-info"><p>Interactive quiz coming in content phase.</p></div></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-miniprep'); return false;">← Miniprep</a><a href="#" onclick="navigateTo('w3-overview'); return false;">Begin Week 3 →</a></div></section>
+
+      <!-- WEEK 3 PAGES -->
+      <section class="page-section" id="page-w3-overview"><h1>Week 3: Molecular Cloning</h1><p class="subtitle">Inserting foreign DNA into a vector and propagating it</p><div class="learning-objectives"><h4>🎯 Learning Objectives</h4><ul><li>Outline the complete molecular cloning workflow from gene isolation to verification</li><li>Distinguish between selection (antibiotic resistance) and screening (identifying correct clones)</li><li>Explain the blue-white screening mechanism using lacZ and X-gal</li></ul></div><div class="page-nav"><a href="#" onclick="navigateTo('w2-quiz'); return false;">← Week 2 Quiz</a><a href="#" onclick="navigateTo('w3-cloning-workflow'); return false;">Cloning Workflow →</a></div></section>
+
+      <section class="page-section" id="page-w3-cloning-workflow"><h1>Cloning Workflow</h1><p class="subtitle">Week 3 &middot; The step-by-step process of molecular cloning</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Complete cloning workflow diagram, ligation, transformation into competent cells, plating, colony selection — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w3-overview'); return false;">← Overview</a><a href="#" onclick="navigateTo('w3-selection-screening'); return false;">Selection & Screening →</a></div></section>
+
+      <section class="page-section" id="page-w3-selection-screening"><h1>Selection &amp; Screening</h1><p class="subtitle">Week 3 &middot; Finding your needle in the haystack</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Antibiotic selection, insertional inactivation, colony PCR, restriction digest verification — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w3-cloning-workflow'); return false;">← Cloning Workflow</a><a href="#" onclick="navigateTo('w3-blue-white'); return false;">Blue-White Screening →</a></div></section>
+
+      <section class="page-section" id="page-w3-blue-white"><h1>Blue-White Screening</h1><p class="subtitle">Week 3 &middot; Visual identification of recombinant clones</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>lacZ gene, β-galactosidase, X-gal substrate, IPTG induction, blue vs white colonies explanation, diagram — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w3-selection-screening'); return false;">← Selection & Screening</a><a href="#" onclick="navigateTo('w3-quiz'); return false;">Knowledge Check →</a></div></section>
+
+      <section class="page-section" id="page-w3-quiz"><h1>Week 3: Knowledge Check</h1><p class="subtitle">Test your understanding of molecular cloning</p><div class="quiz-container"><div class="quiz-header"><span class="quiz-icon">🧪</span><h3>Quiz — covering all Week 3 topics</h3></div><div class="callout callout-info"><p>Interactive quiz coming in content phase.</p></div></div><div class="page-nav"><a href="#" onclick="navigateTo('w3-blue-white'); return false;">← Blue-White Screening</a><a href="#" onclick="navigateTo('w4-overview'); return false;">Begin Week 4 →</a></div></section>
+
+      <!-- WEEK 4 PAGES -->
+      <section class="page-section" id="page-w4-overview"><h1>Week 4: Bacterial Gene Transfer</h1><p class="subtitle">How bacteria share genetic material — the original social network</p><div class="learning-objectives"><h4>🎯 Learning Objectives</h4><ul><li>Define horizontal gene transfer and explain its significance in bacterial evolution</li><li>Compare and contrast transformation, conjugation, and transduction</li><li>Distinguish between the lytic and lysogenic cycles of bacteriophages</li><li>Explain how each gene transfer mechanism is exploited in the laboratory</li></ul></div><div class="page-nav"><a href="#" onclick="navigateTo('w3-quiz'); return false;">← Week 3 Quiz</a><a href="#" onclick="navigateTo('w4-transformation'); return false;">Transformation →</a></div></section>
+
+      <section class="page-section" id="page-w4-transformation"><h1>Transformation</h1><p class="subtitle">Week 4 &middot; Uptake of free DNA from the environment</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Natural vs artificial transformation, competent cells, heat shock, electroporation, CaCl₂ method — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w4-overview'); return false;">← Overview</a><a href="#" onclick="navigateTo('w4-conjugation'); return false;">Conjugation →</a></div></section>
+
+      <section class="page-section" id="page-w4-conjugation"><h1>Conjugation</h1><p class="subtitle">Week 4 &middot; Direct cell-to-cell DNA transfer via pilus</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>F plasmid, F+ and F- cells, Hfr strains, sex pilus, rolling circle replication — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w4-transformation'); return false;">← Transformation</a><a href="#" onclick="navigateTo('w4-transduction'); return false;">Transduction →</a></div></section>
+
+      <section class="page-section" id="page-w4-transduction"><h1>Transduction</h1><p class="subtitle">Week 4 &middot; Bacteriophage-mediated gene transfer</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Generalized vs specialized transduction, packaging errors, lambda phage, comparison table — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w4-conjugation'); return false;">← Conjugation</a><a href="#" onclick="navigateTo('w4-lytic-lysogenic'); return false;">Lytic vs Lysogenic →</a></div></section>
+
+      <section class="page-section" id="page-w4-lytic-lysogenic"><h1>Lytic vs Lysogenic Cycle</h1><p class="subtitle">Week 4 &middot; Two strategies of bacteriophage reproduction</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Lytic cycle steps, lysogenic integration, prophage, induction triggers, comparison diagram — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w4-transduction'); return false;">← Transduction</a><a href="#" onclick="navigateTo('w4-comparison'); return false;">Comparison Table →</a></div></section>
+
+      <section class="page-section" id="page-w4-comparison"><h1>Gene Transfer Comparison</h1><p class="subtitle">Week 4 &middot; Side-by-side comparison of all three mechanisms</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Comprehensive comparison table, Venn diagram, key differences highlighted — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w4-lytic-lysogenic'); return false;">← Lytic vs Lysogenic</a><a href="#" onclick="navigateTo('w4-quiz'); return false;">Knowledge Check →</a></div></section>
+
+      <section class="page-section" id="page-w4-quiz"><h1>Week 4: Knowledge Check</h1><p class="subtitle">Test your understanding of bacterial gene transfer</p><div class="quiz-container"><div class="quiz-header"><span class="quiz-icon">🧪</span><h3>Quiz — covering all Week 4 topics</h3></div><div class="callout callout-info"><p>Interactive quiz coming in content phase.</p></div></div><div class="page-nav"><a href="#" onclick="navigateTo('w4-comparison'); return false;">← Comparison</a><a href="#" onclick="navigateTo('w5-overview'); return false;">Begin Week 5 →</a></div></section>
+
+      <!-- WEEK 5 PAGES -->
+      <section class="page-section" id="page-w5-overview"><h1>Week 5: Transgenic Organisms &amp; GMOs</h1><p class="subtitle">Engineering life — from lab bench to crop field</p><div class="learning-objectives"><h4>🎯 Learning Objectives</h4><ul><li>Define transgenic organism and explain how they are created</li><li>Discuss the principles, benefits, and controversies of GMOs</li><li>Explain how Bt crops work at the molecular level</li><li>Describe the production and applications of recombinant proteins</li></ul></div><div class="page-nav"><a href="#" onclick="navigateTo('w4-quiz'); return false;">← Week 4 Quiz</a><a href="#" onclick="navigateTo('w5-transgenic'); return false;">Transgenic Organisms →</a></div></section>
+
+      <section class="page-section" id="page-w5-transgenic"><h1>Transgenic Organisms</h1><p class="subtitle">Week 5 &middot; Organisms carrying foreign genes</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Definition, methods of creation (microinjection, gene gun, Agrobacterium), examples, applications — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w5-overview'); return false;">← Overview</a><a href="#" onclick="navigateTo('w5-gmo'); return false;">GMO Principles →</a></div></section>
+
+      <section class="page-section" id="page-w5-gmo"><h1>GMO Principles</h1><p class="subtitle">Week 5 &middot; Genetically modified organisms in context</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>What qualifies as a GMO, regulatory frameworks, benefits vs risks, public debate — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w5-transgenic'); return false;">← Transgenic</a><a href="#" onclick="navigateTo('w5-bt-crops'); return false;">Bt Crops →</a></div></section>
+
+      <section class="page-section" id="page-w5-bt-crops"><h1>Bt Crops &amp; Insect Resistance</h1><p class="subtitle">Week 5 &middot; Bacillus thuringiensis crystal proteins in agriculture</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Cry protein mechanism, Bt toxin activation in insect gut, refuge strategy, resistance management — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w5-gmo'); return false;">← GMO</a><a href="#" onclick="navigateTo('w5-recombinant-proteins'); return false;">Recombinant Proteins →</a></div></section>
+
+      <section class="page-section" id="page-w5-recombinant-proteins"><h1>Recombinant Proteins</h1><p class="subtitle">Week 5 &middot; Producing therapeutic proteins using engineered organisms</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Insulin production, expression systems (E. coli, yeast, CHO cells), purification, examples — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w5-bt-crops'); return false;">← Bt Crops</a><a href="#" onclick="navigateTo('w5-quiz'); return false;">Knowledge Check →</a></div></section>
+
+      <section class="page-section" id="page-w5-quiz"><h1>Week 5: Knowledge Check</h1><p class="subtitle">Test your understanding of transgenic organisms and GMOs</p><div class="quiz-container"><div class="quiz-header"><span class="quiz-icon">🧪</span><h3>Quiz — covering all Week 5 topics</h3></div><div class="callout callout-info"><p>Interactive quiz coming in content phase.</p></div></div><div class="page-nav"><a href="#" onclick="navigateTo('w5-recombinant-proteins'); return false;">← Recombinant Proteins</a><a href="#" onclick="navigateTo('w6-overview'); return false;">Begin Week 6 →</a></div></section>
+
+      <!-- WEEK 6 PAGES -->
+      <section class="page-section" id="page-w6-overview"><h1>Week 6: Gene Therapy</h1><p class="subtitle">Correcting genetic defects at their source</p><div class="learning-objectives"><h4>🎯 Learning Objectives</h4><ul><li>Distinguish between somatic and germline gene therapy and their ethical implications</li><li>Compare viral and non-viral delivery vectors for gene therapy</li><li>Differentiate between ex vivo and in vivo gene therapy approaches</li><li>Analyse the SCID case study as a landmark in gene therapy history</li></ul></div><div class="page-nav"><a href="#" onclick="navigateTo('w5-quiz'); return false;">← Week 5 Quiz</a><a href="#" onclick="navigateTo('w6-somatic-germline'); return false;">Somatic vs Germline →</a></div></section>
+
+      <section class="page-section" id="page-w6-somatic-germline"><h1>Somatic vs Germline Gene Therapy</h1><p class="subtitle">Week 6 &middot; Treating the individual vs altering the lineage</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Definitions, comparison table, ethical considerations, current regulations — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w6-overview'); return false;">← Overview</a><a href="#" onclick="navigateTo('w6-delivery'); return false;">Delivery Methods →</a></div></section>
+
+      <section class="page-section" id="page-w6-delivery"><h1>Viral &amp; Non-Viral Delivery</h1><p class="subtitle">Week 6 &middot; Getting the therapeutic gene into target cells</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Adenovirus, AAV, retrovirus, lentivirus vectors; liposomes, electroporation, gene gun — comparison table — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w6-somatic-germline'); return false;">← Somatic vs Germline</a><a href="#" onclick="navigateTo('w6-ex-vivo-in-vivo'); return false;">Ex Vivo vs In Vivo →</a></div></section>
+
+      <section class="page-section" id="page-w6-ex-vivo-in-vivo"><h1>Ex Vivo vs In Vivo Gene Therapy</h1><p class="subtitle">Week 6 &middot; Two strategies for delivering genetic corrections</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Ex vivo procedure, in vivo procedure, advantages and disadvantages of each, flow diagrams — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w6-delivery'); return false;">← Delivery Methods</a><a href="#" onclick="navigateTo('w6-scid'); return false;">SCID Case Study →</a></div></section>
+
+      <section class="page-section" id="page-w6-scid"><h1>SCID Case Study</h1><p class="subtitle">Week 6 &middot; The "bubble boy" disease and the dawn of gene therapy</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>ADA-SCID, X-linked SCID, the 2000 French trial, retroviral insertion mutagenesis, lessons learned — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w6-ex-vivo-in-vivo'); return false;">← Ex Vivo vs In Vivo</a><a href="#" onclick="navigateTo('w6-quiz'); return false;">Knowledge Check →</a></div></section>
+
+      <section class="page-section" id="page-w6-quiz"><h1>Week 6: Knowledge Check</h1><p class="subtitle">Test your understanding of gene therapy</p><div class="quiz-container"><div class="quiz-header"><span class="quiz-icon">🧪</span><h3>Quiz — covering all Week 6 topics</h3></div><div class="callout callout-info"><p>Interactive quiz coming in content phase.</p></div></div><div class="page-nav"><a href="#" onclick="navigateTo('w6-scid'); return false;">← SCID Case Study</a><a href="#" onclick="navigateTo('w7-overview'); return false;">Begin Week 7 →</a></div></section>
+
+      <!-- WEEK 7 PAGES -->
+      <section class="page-section" id="page-w7-overview"><h1>Week 7: PCR Applications &amp; qPCR</h1><p class="subtitle">Advanced PCR — from qualitative detection to precise quantification</p><div class="learning-objectives"><h4>🎯 Learning Objectives</h4><ul><li>Describe diverse applications of PCR beyond simple amplification</li><li>Explain the principles of real-time PCR (qPCR) and how it differs from endpoint PCR</li><li>Compare SYBR Green and TaqMan probe detection chemistries</li><li>Interpret Ct values and explain their relationship to initial template quantity</li><li>Distinguish RT-PCR from qPCR and explain when each is used</li></ul></div><div class="page-nav"><a href="#" onclick="navigateTo('w6-quiz'); return false;">← Week 6 Quiz</a><a href="#" onclick="navigateTo('w7-pcr-applications'); return false;">PCR Applications →</a></div></section>
+
+      <section class="page-section" id="page-w7-pcr-applications"><h1>PCR Applications</h1><p class="subtitle">Week 7 &middot; Beyond basic amplification</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Forensics, diagnostics, cloning, mutagenesis, ancient DNA, paternity testing — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w7-overview'); return false;">← Overview</a><a href="#" onclick="navigateTo('w7-qpcr'); return false;">qPCR →</a></div></section>
+
+      <section class="page-section" id="page-w7-qpcr"><h1>Real-Time PCR (qPCR)</h1><p class="subtitle">Week 7 &middot; Watching amplification happen in real time</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>qPCR principle, amplification plot, fluorescence detection, comparison to endpoint PCR — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w7-pcr-applications'); return false;">← PCR Applications</a><a href="#" onclick="navigateTo('w7-sybr-taqman'); return false;">SYBR Green vs TaqMan →</a></div></section>
+
+      <section class="page-section" id="page-w7-sybr-taqman"><h1>SYBR Green vs TaqMan</h1><p class="subtitle">Week 7 &middot; Two fluorescence chemistries for qPCR detection</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>SYBR Green intercalation, TaqMan probe hydrolysis, specificity comparison, cost, melt curve analysis — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w7-qpcr'); return false;">← qPCR</a><a href="#" onclick="navigateTo('w7-ct-values'); return false;">Ct Values →</a></div></section>
+
+      <section class="page-section" id="page-w7-ct-values"><h1>Ct Values &amp; Quantification</h1><p class="subtitle">Week 7 &middot; The cycle threshold — the number that matters</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Ct definition, relationship to template amount (lower Ct = more template), standard curves, ΔΔCt method — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w7-sybr-taqman'); return false;">← SYBR vs TaqMan</a><a href="#" onclick="navigateTo('w7-rt-pcr'); return false;">RT-PCR →</a></div></section>
+
+      <section class="page-section" id="page-w7-rt-pcr"><h1>RT-PCR (Reverse Transcription PCR)</h1><p class="subtitle">Week 7 &middot; Detecting and quantifying RNA by converting it to cDNA first</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Reverse transcriptase, oligo-dT primers, random hexamers, one-step vs two-step, applications in gene expression analysis — coming in next phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w7-ct-values'); return false;">← Ct Values</a><a href="#" onclick="navigateTo('w7-quiz'); return false;">Knowledge Check →</a></div></section>
+
+      <section class="page-section" id="page-w7-quiz"><h1>Week 7: Knowledge Check</h1><p class="subtitle">Test your understanding of PCR applications and qPCR</p><div class="quiz-container"><div class="quiz-header"><span class="quiz-icon">🧪</span><h3>Quiz — covering all Week 7 topics</h3></div><div class="callout callout-info"><p>Interactive quiz coming in content phase.</p></div></div><div class="page-nav"><a href="#" onclick="navigateTo('w7-rt-pcr'); return false;">← RT-PCR</a><a href="#" onclick="navigateTo('glossary'); return false;">Full Glossary →</a></div></section>
+
+      <!-- EXTRAS -->
+      <section class="page-section" id="page-glossary"><h1>Full Glossary</h1><p class="subtitle">All key terms from Weeks 1–7 in alphabetical order</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Comprehensive A–Z glossary of all key terms with definitions — coming in content phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('w7-quiz'); return false;">← Week 7 Quiz</a><a href="#" onclick="navigateTo('exam-prep'); return false;">Exam Prep →</a></div></section>
+
+      <section class="page-section" id="page-exam-prep"><h1>Exam Preparation</h1><p class="subtitle">Strategies, practice questions, and revision checklists</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>High-yield revision checklist, common exam question types, practice questions, time management tips — coming in content phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('glossary'); return false;">← Glossary</a><a href="#" onclick="navigateTo('cheat-sheet'); return false;">Cheat Sheet →</a></div></section>
+
+      <section class="page-section" id="page-cheat-sheet"><h1>Quick Reference Sheet</h1><p class="subtitle">One-page summary of essential facts, enzymes, and processes</p><div class="callout callout-info"><div class="callout-title">📝 Content Loading Zone</div><p>Condensed cheat sheet with key enzymes, processes, comparison tables, and mnemonics — coming in content phase.</p></div><div class="page-nav"><a href="#" onclick="navigateTo('exam-prep'); return false;">← Exam Prep</a><a href="#" onclick="navigateTo('home'); return false;">Course Home →</a></div></section>
+
+    </div><!-- end .content-wrapper -->
+  </main>
+</div><!-- end .layout -->
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <p>ONPS2431 Molecular Biology &amp; Genetics — Mid-Semester Study Guide</p>
+  <p>RMIT University &middot; Associate Degree in Applied Science (Pre-Pharmacy) &middot; Semester 1, 2026</p>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+// ---- STATE ----
+let currentPage = 'home';
+const visitedPages = new Set();
+
+// ---- PAGE MAP (for breadcrumbs) ----
+const pageMap = {
+  'home': { title: 'Course Home', parent: null, week: null },
+  // Week 1
+  'w1-overview': { title: 'Week 1: Overview', parent: 'home', week: 'w1' },
+  'w1-dna-structure': { title: 'DNA Structure', parent: 'w1-overview', week: 'w1' },
+  'w1-replication': { title: 'DNA Replication', parent: 'w1-overview', week: 'w1' },
+  'w1-transcription': { title: 'Transcription', parent: 'w1-overview', week: 'w1' },
+  'w1-translation': { title: 'Translation', parent: 'w1-overview', week: 'w1' },
+  'w1-central-dogma': { title: 'Central Dogma', parent: 'w1-overview', week: 'w1' },
+  'w1-quiz': { title: 'Knowledge Check', parent: 'w1-overview', week: 'w1' },
+  // Week 2
+  'w2-overview': { title: 'Week 2: Overview', parent: 'home', week: 'w2' },
+  'w2-gel-electrophoresis': { title: 'Gel Electrophoresis', parent: 'w2-overview', week: 'w2' },
+  'w2-restriction-enzymes': { title: 'Restriction Enzymes', parent: 'w2-overview', week: 'w2' },
+  'w2-vectors': { title: 'Vectors & Plasmids', parent: 'w2-overview', week: 'w2' },
+  'w2-pcr': { title: 'PCR Fundamentals', parent: 'w2-overview', week: 'w2' },
+  'w2-blotting': { title: 'Blotting Techniques', parent: 'w2-overview', week: 'w2' },
+  'w2-miniprep': { title: 'Miniprep', parent: 'w2-overview', week: 'w2' },
+  'w2-quiz': { title: 'Knowledge Check', parent: 'w2-overview', week: 'w2' },
+  // Week 3
+  'w3-overview': { title: 'Week 3: Overview', parent: 'home', week: 'w3' },
+  'w3-cloning-workflow': { title: 'Cloning Workflow', parent: 'w3-overview', week: 'w3' },
+  'w3-selection-screening': { title: 'Selection & Screening', parent: 'w3-overview', week: 'w3' },
+  'w3-blue-white': { title: 'Blue-White Screening', parent: 'w3-overview', week: 'w3' },
+  'w3-quiz': { title: 'Knowledge Check', parent: 'w3-overview', week: 'w3' },
+  // Week 4
+  'w4-overview': { title: 'Week 4: Overview', parent: 'home', week: 'w4' },
+  'w4-transformation': { title: 'Transformation', parent: 'w4-overview', week: 'w4' },
+  'w4-conjugation': { title: 'Conjugation', parent: 'w4-overview', week: 'w4' },
+  'w4-transduction': { title: 'Transduction', parent: 'w4-overview', week: 'w4' },
+  'w4-lytic-lysogenic': { title: 'Lytic vs Lysogenic', parent: 'w4-overview', week: 'w4' },
+  'w4-comparison': { title: 'Comparison Table', parent: 'w4-overview', week: 'w4' },
+  'w4-quiz': { title: 'Knowledge Check', parent: 'w4-overview', week: 'w4' },
+  // Week 5
+  'w5-overview': { title: 'Week 5: Overview', parent: 'home', week: 'w5' },
+  'w5-transgenic': { title: 'Transgenic Organisms', parent: 'w5-overview', week: 'w5' },
+  'w5-gmo': { title: 'GMO Principles', parent: 'w5-overview', week: 'w5' },
+  'w5-bt-crops': { title: 'Bt Crops', parent: 'w5-overview', week: 'w5' },
+  'w5-recombinant-proteins': { title: 'Recombinant Proteins', parent: 'w5-overview', week: 'w5' },
+  'w5-quiz': { title: 'Knowledge Check', parent: 'w5-overview', week: 'w5' },
+  // Week 6
+  'w6-overview': { title: 'Week 6: Overview', parent: 'home', week: 'w6' },
+  'w6-somatic-germline': { title: 'Somatic vs Germline', parent: 'w6-overview', week: 'w6' },
+  'w6-delivery': { title: 'Delivery Methods', parent: 'w6-overview', week: 'w6' },
+  'w6-ex-vivo-in-vivo': { title: 'Ex Vivo vs In Vivo', parent: 'w6-overview', week: 'w6' },
+  'w6-scid': { title: 'SCID Case Study', parent: 'w6-overview', week: 'w6' },
+  'w6-quiz': { title: 'Knowledge Check', parent: 'w6-overview', week: 'w6' },
+  // Week 7
+  'w7-overview': { title: 'Week 7: Overview', parent: 'home', week: 'w7' },
+  'w7-pcr-applications': { title: 'PCR Applications', parent: 'w7-overview', week: 'w7' },
+  'w7-qpcr': { title: 'qPCR', parent: 'w7-overview', week: 'w7' },
+  'w7-sybr-taqman': { title: 'SYBR Green vs TaqMan', parent: 'w7-overview', week: 'w7' },
+  'w7-ct-values': { title: 'Ct Values', parent: 'w7-overview', week: 'w7' },
+  'w7-rt-pcr': { title: 'RT-PCR', parent: 'w7-overview', week: 'w7' },
+  'w7-quiz': { title: 'Knowledge Check', parent: 'w7-overview', week: 'w7' },
+  // Extras
+  'glossary': { title: 'Full Glossary', parent: 'home', week: 'extras' },
+  'exam-prep': { title: 'Exam Preparation', parent: 'home', week: 'extras' },
+  'cheat-sheet': { title: 'Quick Reference Sheet', parent: 'home', week: 'extras' },
+};
+
+// Total pages for progress
+const totalPages = Object.keys(pageMap).length;
+
+// ---- NAVIGATION ----
+function navigateTo(pageId) {
+  // Hide all pages
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+
+  // Show target page
+  const target = document.getElementById('page-' + pageId);
+  if (target) {
+    target.classList.add('active');
+    currentPage = pageId;
+    visitedPages.add(pageId);
+    updateBreadcrumbs(pageId);
+    updateSidebarActive(pageId);
+    updateProgress();
+    closeMobileMenu();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Update URL hash
+    history.pushState(null, '', '#' + pageId);
+  }
+}
+
+// ---- BREADCRUMBS ----
+function updateBreadcrumbs(pageId) {
+  const bc = document.getElementById('breadcrumbs');
+  const info = pageMap[pageId];
+  if (!info) return;
+
+  let trail = [];
+  let current = pageId;
+  while (current) {
+    const item = pageMap[current];
+    trail.unshift({ id: current, title: item.title });
+    current = item.parent;
+  }
+
+  bc.innerHTML = trail.map((item, i) => {
+    if (i === trail.length - 1) {
+      return `<strong>${item.title}</strong>`;
+    }
+    return `<a href="#" onclick="navigateTo('${item.id}'); return false;">${item.title}</a><span>›</span>`;
+  }).join('');
+}
+
+// ---- SIDEBAR ----
+function toggleSection(sectionId) {
+  const section = document.querySelector(`.sidebar-section[data-section="${sectionId}"]`);
+  if (!section) return;
+
+  // If it's a section without sub-links (like home), navigate directly
+  const links = section.querySelector('.sidebar-links');
+  if (!links) {
+    navigateTo(sectionId);
+    return;
+  }
+
+  section.classList.toggle('open');
+}
+
+function updateSidebarActive(pageId) {
+  // Remove all active states
+  document.querySelectorAll('.sidebar-links li a').forEach(a => a.classList.remove('active'));
+  document.querySelectorAll('.sidebar-section').forEach(s => s.classList.remove('active'));
+
+  // Find and activate the correct link
+  const link = document.querySelector(`a[data-page="${pageId}"]`);
+  if (link) {
+    link.classList.add('active');
+    const section = link.closest('.sidebar-section');
+    if (section) {
+      section.classList.add('active');
+      section.classList.add('open');
+    }
+  }
+
+  // Mark visited pages
+  visitedPages.forEach(pid => {
+    const l = document.querySelector(`a[data-page="${pid}"]`);
+    if (l) l.classList.add('completed');
+  });
+}
+
+// ---- PROGRESS BAR ----
+function updateProgress() {
+  const pct = Math.round((visitedPages.size / totalPages) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// ---- MOBILE MENU ----
+function closeMobileMenu() {
+  document.getElementById('sidebar').classList.remove('mobile-open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('mobile-open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+});
+
+document.getElementById('sidebarOverlay').addEventListener('click', closeMobileMenu);
+
+// ---- SIDEBAR LINK CLICKS ----
+document.querySelectorAll('.sidebar-links li a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const pageId = link.getAttribute('data-page');
+    if (pageId) navigateTo(pageId);
+  });
+});
+
+// ---- HASH NAVIGATION ----
+function handleHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && pageMap[hash]) {
+    navigateTo(hash);
+  }
+}
+window.addEventListener('hashchange', handleHash);
+window.addEventListener('load', handleHash);
+
+// ---- TAB SYSTEM ----
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('tab-btn')) {
+    const group = e.target.closest('.tab-group');
+    group.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    group.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    e.target.classList.add('active');
+    const panel = group.querySelector(`#${e.target.dataset.tab}`);
+    if (panel) panel.classList.add('active');
+  }
+});
+
+// ---- FLASHCARD FLIP ----
+document.addEventListener('click', (e) => {
+  const card = e.target.closest('.flashcard');
+  if (card) card.classList.toggle('flipped');
+});
+</script>
+
+</body>
+</html>
